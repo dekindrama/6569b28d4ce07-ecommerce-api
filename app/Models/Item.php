@@ -12,6 +12,9 @@ class Item extends Model
 
     public $incrementing = false;
     protected $primaryKey = 'id';
+    protected $appends = [
+        'status_stock',
+    ];
 
     protected $fillable = [
         'id',
@@ -21,4 +24,8 @@ class Item extends Model
         'unit',
         'unit_price',
     ];
+
+    public function getStatusStockAttribute() {
+        return ($this->stock <= 0) ? false : true;
+    }
 }

@@ -27,5 +27,8 @@ Route::middleware(['auth:sanctum'])->group(function () {
 
 //* items
 Route::middleware(['auth:sanctum'])->group(function () {
+    Route::get('items', [ItemController::class, 'getListItems'])->name('items.index');
+    Route::get('items/{item_id}', [ItemController::class, 'getDetailItem'])->name('items.show');
     Route::post('items', [ItemController::class, 'storeItem'])->name('items.store');
+    Route::post('items/{item_id}', [ItemController::class, 'updateItem'])->name('items.update');
 });
