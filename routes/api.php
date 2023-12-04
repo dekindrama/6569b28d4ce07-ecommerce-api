@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Item\ItemController;
+use App\Http\Controllers\API\Order\OrderController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -32,4 +33,9 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('items', [ItemController::class, 'storeItem'])->name('items.store');
     Route::post('items/{item_id}', [ItemController::class, 'updateItem'])->name('items.update');
     Route::post('items/{item_id}/delete', [ItemController::class, 'softDeleteItem'])->name('items.delete');
+});
+
+//* orders
+Route::middleware(['auth:sanctum'])->group(function () {
+    Route::post('orders', [OrderController::class, 'storeOrder'])->name('orders.store');
 });
