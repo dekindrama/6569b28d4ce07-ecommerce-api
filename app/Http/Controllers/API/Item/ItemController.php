@@ -140,16 +140,37 @@ class ItemController extends Controller
     }
 
     public function softDeleteItem($item_id) : Response {
-        //* check user is admin/super admin
+        try {
+            //* check logged user is admin / super admin
+            $loggedUser = auth('sanctum')->user();
+            $isNotAuthorized = !(in_array($loggedUser->role, UserRoleEnum::ROLES));
+            if ($isNotAuthorized) {
+                throw new UnauthorizedException('action is unauthorized');
+            }
 
-        //* get item
+            //* get item
+            $item = Item::find($item_id);
+            if (!$item) {
+                throw new NotFoundException('item not found');
+            }
 
-        //* soft delete item
+            //* soft delete item
+            $item->delete();
 
-        //* return response
+            //* return response
+            return ResponseHelper::generate(
+                true,
+                'success delete item',
+                Response::HTTP_OK,
+            );
+        } catch (CommonException $th) {
+            return $th->renderResponse();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
-    public function destroyItem() : Response {
+    // public function destroyItem() : Response {
 
-    }
+    // }
 }
