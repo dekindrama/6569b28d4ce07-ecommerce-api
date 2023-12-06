@@ -38,4 +38,7 @@ Route::middleware(['auth:sanctum'])->group(function () {
 //* orders
 Route::middleware(['auth:sanctum'])->group(function () {
     Route::post('orders', [OrderController::class, 'storeOrder'])->name('orders.store');
+    Route::get('orders', [OrderController::class, 'getListOrders'])->name('orders.index');
+    Route::get('orders/{order_id}', [OrderController::class, 'getDetailOrder'])->name('orders.show');
+    Route::get('orders/{order_id}/generate-reciept', [OrderController::class, 'generateReciept'])->name('orders.generate_reciept');
 });

@@ -10,6 +10,7 @@ use App\Exceptions\Commons\UnauthorizedException;
 use App\Helpers\ResponseHelper;
 use App\Http\Controllers\Controller;
 use App\Http\Requests\Order\StoreOrderRequest;
+use App\Http\Resources\Order\ListOrdersResource;
 use App\Http\Resources\Order\OrderDetailsResource;
 use App\Models\Item;
 use App\Models\Order;
@@ -22,17 +23,92 @@ use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
-    // public function getListOrders() : Response {
+    public function getListOrders() : Response {
+        try {
+            //* check logged user super admin
+            $loggedUser = auth('sanctum')->user();
+            if ($loggedUser->role !== UserRoleEnum::SUPER_ADMIN) {
+                throw new UnauthorizedException('action is unauthorized, only for super admin');
+            }
 
-    // }
+            //* get order
+            $order = Order::all();
 
-    // public function generateReciept() : Response {
+            //* return response
+            return ResponseHelper::generate(
+                true,
+                'success get list orders',
+                Response::HTTP_OK,
+                [
+                    'order' => ListOrdersResource::collection($order),
+                ],
+            );
+        } catch (CommonException $th) {
+            return $th->renderResponse();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 
-    // }
+    public function generateReciept($order_id) : Response {
+        try {
+            //* check logged user super admin
+            $loggedUser = auth('sanctum')->user();
+            if ($loggedUser->role !== UserRoleEnum::SUPER_ADMIN) {
+                throw new UnauthorizedException('action is unauthorized, only for super admin');
+            }
 
-    // public function getDetailOrder() : Response {
+            //* get order
+            $order = Order::find($order_id);
+            if (!$order) {
+                throw new NotFoundException('order not found');
+            }
 
-    // }
+            //* return response
+            return ResponseHelper::generate(
+                true,
+                'success generate reciept',
+                Response::HTTP_OK,
+                [
+                    'order' => new OrderDetailsResource($order),
+                ],
+            );
+        } catch (CommonException $th) {
+            return $th->renderResponse();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public function getDetailOrder($order_id) : Response {
+        try {
+            //* check logged user super admin
+            $loggedUser = auth('sanctum')->user();
+            if ($loggedUser->role !== UserRoleEnum::SUPER_ADMIN) {
+                throw new UnauthorizedException('action is unauthorized, only for super admin');
+            }
+
+            //* get order
+            $order = Order::find($order_id);
+            if (!$order) {
+                throw new NotFoundException('order not found');
+            }
+
+            //* return response
+            return ResponseHelper::generate(
+                true,
+                'success get detail order',
+                Response::HTTP_OK,
+                [
+                    'order' => new OrderDetailsResource($order),
+                ],
+            );
+        } catch (CommonException $th) {
+            return $th->renderResponse();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 
     public function storeOrder(StoreOrderRequest $request) : Response {
         try {
