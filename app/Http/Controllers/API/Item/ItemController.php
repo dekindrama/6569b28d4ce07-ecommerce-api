@@ -59,36 +59,48 @@ class ItemController extends Controller
     }
 
     public function getListItems() : Response {
-        //* get list item
-        $items = Item::get();
+        try {
+            //* get list item
+            $items = Item::get();
 
-        //* return response
-        return ResponseHelper::generate(
-            true,
-            'success get list items',
-            Response::HTTP_OK,
-            [
-                'items' => ListItemsResource::collection($items),
-            ],
-        );
+            //* return response
+            return ResponseHelper::generate(
+                true,
+                'success get list items',
+                Response::HTTP_OK,
+                [
+                    'items' => ListItemsResource::collection($items),
+                ],
+            );
+        } catch (CommonException $th) {
+            return $th->renderResponse();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function getDetailItem($item_id) : Response {
-        //* get item
-        $item = Item::find($item_id);
-        if (!$item) {
-            throw new NotFoundException('item not found');
-        }
+        try {
+            //* get item
+            $item = Item::find($item_id);
+            if (!$item) {
+                throw new NotFoundException('item not found');
+            }
 
-        //* return response
-        return ResponseHelper::generate(
-            true,
-            'success get item',
-            Response::HTTP_OK,
-            [
-                'item' => new ItemDetailsResource($item),
-            ],
-        );
+            //* return response
+            return ResponseHelper::generate(
+                true,
+                'success get item',
+                Response::HTTP_OK,
+                [
+                    'item' => new ItemDetailsResource($item),
+                ],
+            );
+        } catch (CommonException $th) {
+            return $th->renderResponse();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
     }
 
     public function updateItem(UpdateItemRequest $request, $item_id) : Response {
