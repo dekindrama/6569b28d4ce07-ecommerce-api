@@ -59,7 +59,10 @@ class OrderController extends Controller
             }
 
             //* get order
-            $order = Order::find($order_id);
+            $order = Order::query()
+                ->where('id', $order_id)
+                ->with(['item', 'payment'])
+                ->first();
             if (!$order) {
                 throw new NotFoundException('order not found');
             }
@@ -89,7 +92,10 @@ class OrderController extends Controller
             }
 
             //* get order
-            $order = Order::find($order_id);
+            $order = Order::query()
+                ->where('id', $order_id)
+                ->with(['item', 'payment'])
+                ->first();
             if (!$order) {
                 throw new NotFoundException('order not found');
             }
