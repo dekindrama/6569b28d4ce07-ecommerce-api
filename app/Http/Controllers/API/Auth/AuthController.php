@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\API\Auth;
 
 use App\Enums\UserRoleEnum;
+use App\Exceptions\Commons\BadRequestException;
 use App\Exceptions\Commons\CommonException;
 use App\Exceptions\Commons\UnauthorizedException;
 use App\Helpers\ResponseHelper;
@@ -25,9 +26,7 @@ class AuthController extends Controller
             $user = User::where('email', $request->email)->first();
 
             if (! $user || ! Hash::check($request->password, $user->password)) {
-                throw ValidationException::withMessages([
-                    'email' => ['The provided credentials are incorrect.'],
-                ]);
+                throw new BadRequestException('The provided credentials are incorrect.');
             }
 
             $accessToken = $user->createToken($request->device_name)->plainTextToken;

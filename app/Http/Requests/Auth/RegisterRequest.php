@@ -5,6 +5,10 @@ namespace App\Http\Requests\Auth;
 use Illuminate\Foundation\Http\FormRequest;
 use App\Enums\UserRoleEnum;
 use Illuminate\Validation\Rule;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Helpers\ResponseHelper;
+use Illuminate\Http\Response;
+use Illuminate\Contracts\Validation\Validator;
 
 class RegisterRequest extends FormRequest
 {
@@ -29,5 +33,16 @@ class RegisterRequest extends FormRequest
             'password' => ['required', 'string', 'min:8', 'confirmed'],
             'role' => ['required', 'string', Rule::in(UserRoleEnum::ROLES)],
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(ResponseHelper::generate(
+            false,
+            $validator->errors()->first(),
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+            null,
+            $validator->errors()->toArray(),
+        ));
     }
 }

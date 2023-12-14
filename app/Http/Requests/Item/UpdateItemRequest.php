@@ -3,6 +3,10 @@
 namespace App\Http\Requests\Item;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Http\Exceptions\HttpResponseException;
+use App\Helpers\ResponseHelper;
+use Illuminate\Http\Response;
+use Illuminate\Contracts\Validation\Validator;
 
 class UpdateItemRequest extends FormRequest
 {
@@ -28,5 +32,16 @@ class UpdateItemRequest extends FormRequest
             'unit' => ['required', 'string', 'max:255'],
             'unit_price' => ['required', 'integer'],
         ];
+    }
+
+    public function failedValidation(Validator $validator)
+    {
+        throw new HttpResponseException(ResponseHelper::generate(
+            false,
+            $validator->errors()->first(),
+            Response::HTTP_UNPROCESSABLE_ENTITY,
+            null,
+            $validator->errors()->toArray(),
+        ));
     }
 }
