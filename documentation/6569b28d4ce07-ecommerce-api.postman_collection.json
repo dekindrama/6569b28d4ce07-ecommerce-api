@@ -1,0 +1,2057 @@
+{
+	"info": {
+		"_postman_id": "99c36049-8f58-47aa-8573-6805b3e13f6c",
+		"name": "6569b28d4ce07-ecommerce-api",
+		"schema": "https://schema.getpostman.com/json/collection/v2.1.0/collection.json",
+		"_exporter_id": "25688638"
+	},
+	"item": [
+		{
+			"name": "Auth",
+			"item": [
+				{
+					"name": "login",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									"var jsonData = JSON.parse(responseBody);",
+									"postman.setEnvironmentVariable(\"access_token\", jsonData.data.access_token);"
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"email\": \"test@example.com\",\n    \"password\": \"password\",\n    \"device_name\": \"android\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url_local}}/login",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"login"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "login",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"email\": \"test4@example.com\",\n    \"password\": \"password\",\n    \"device_name\": \"android\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url_local}}/login",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"login"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 12:04:58 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 12:04:58 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success generate token\",\n    \"data\": {\n        \"access_token\": \"10|c9y3Exi3N1ge8VUlbCFbJ0fCCSV8FxZBfH3A2fsl6e7eff8e\"\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "logout",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url_local}}/logout",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"logout"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "logout",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url_local}}/logout",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"logout"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 12:06:05 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 12:06:05 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success logout\"\n}"
+						}
+					]
+				},
+				{
+					"name": "register",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test6@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url_local}}/register",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"register"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "register",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test6@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url_local}}/register",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"register"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 12:06:26 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 12:06:26 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success register user\",\n    \"data\": {\n        \"user\": {\n            \"id\": \"9abe8f4c-8971-45e7-87fd-7e415a5f1034\",\n            \"name\": \"john doe\",\n            \"email\": \"test6@example.com\",\n            \"email_verified_at\": \"2023-12-01T12:06:26.000000Z\",\n            \"role\": \"ADMIN\",\n            \"updated_at\": \"2023-12-01T12:06:26.000000Z\",\n            \"created_at\": \"2023-12-01T12:06:26.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get list user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test2@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url_local}}/users",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"users"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get list user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test2@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url_local}}/users",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"users"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 12:06:44 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 12:06:44 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success get list users\",\n    \"data\": {\n        \"users\": [\n            {\n                \"id\": \"9abe82ae-89b0-4e88-8071-9472efc3d0a2\",\n                \"name\": \"Aurelie Medhurst\",\n                \"email\": \"test@example.com\",\n                \"created_at\": \"2023-12-01T11:31:09.000000Z\",\n                \"updated_at\": \"2023-12-01T11:31:09.000000Z\"\n            },\n            {\n                \"id\": \"9abe8520-d264-4275-a3ec-0e597ac84f00\",\n                \"name\": \"john doe\",\n                \"email\": \"test2@example.com\",\n                \"created_at\": \"2023-12-01T11:38:00.000000Z\",\n                \"updated_at\": \"2023-12-01T11:38:00.000000Z\"\n            },\n            {\n                \"id\": \"9abe8809-b49c-4901-b659-7de849ca6fc7\",\n                \"name\": \"john doe\",\n                \"email\": \"test3@example.com\",\n                \"created_at\": \"2023-12-01T11:46:08.000000Z\",\n                \"updated_at\": \"2023-12-01T11:46:08.000000Z\"\n            },\n            {\n                \"id\": \"9abe8827-1a57-4ce9-aa90-7950a7ffc1a4\",\n                \"name\": \"john doe\",\n                \"email\": \"test4@example.com\",\n                \"created_at\": \"2023-12-01T11:46:27.000000Z\",\n                \"updated_at\": \"2023-12-01T11:46:27.000000Z\"\n            },\n            {\n                \"id\": \"9abe8960-f77d-4753-9ab1-43382cbb602e\",\n                \"name\": \"john doe\",\n                \"email\": \"test5@example.com\",\n                \"created_at\": \"2023-12-01T11:49:53.000000Z\",\n                \"updated_at\": \"2023-12-01T11:49:53.000000Z\"\n            },\n            {\n                \"id\": \"9abe8f4c-8971-45e7-87fd-7e415a5f1034\",\n                \"name\": \"john doe\",\n                \"email\": \"test6@example.com\",\n                \"created_at\": \"2023-12-01T12:06:26.000000Z\",\n                \"updated_at\": \"2023-12-01T12:06:26.000000Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get logged user",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test2@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}"
+						},
+						"url": {
+							"raw": "{{base_url_local}}/logged-user",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"logged-user"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get logged user",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test2@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url_local}}/logged-user",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"logged-user"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 12:30:49 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Fri, 01 Dec 2023 12:30:49 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success get logged user\",\n    \"data\": {\n        \"logged_user\": {\n            \"id\": \"9abe9426-7177-47c0-a986-038346dd69f8\",\n            \"name\": \"Raina Haag\",\n            \"email\": \"test@example.com\",\n            \"email_verified_at\": \"2023-12-01T12:20:00.000000Z\",\n            \"role\": \"SUPER_ADMIN\",\n            \"created_at\": \"2023-12-01T12:20:00.000000Z\",\n            \"updated_at\": \"2023-12-01T12:20:00.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "items",
+			"item": [
+				{
+					"name": "store item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": " item 1",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": " 200",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": []
+								},
+								{
+									"key": "unit",
+									"value": " pcs",
+									"type": "text"
+								},
+								{
+									"key": "unit_price",
+									"value": " 20000",
+									"type": "text"
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url_local}}/items",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "store item",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": " item 1",
+											"type": "text"
+										},
+										{
+											"key": "stock",
+											"value": " 200",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": []
+										},
+										{
+											"key": "unit",
+											"value": " pcs",
+											"type": "text"
+										},
+										{
+											"key": "unit_price",
+											"value": " 20000",
+											"type": "text"
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url_local}}/items",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"items"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Dec 2023 14:10:10 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Dec 2023 14:10:10 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success store item\",\n    \"data\": {\n        \"item\": {\n            \"id\": \"9ac0be88-5bf7-4889-86d4-a83811142330\",\n            \"name\": \"item 1\",\n            \"picture\": \"pictures/items/UjLxsfo7xMXVDJVwzAp5jwLSb7XQrD3cuHYeOXN5.jpg\",\n            \"stock\": \"200\",\n            \"unit\": \"pcs\",\n            \"unit_price\": \"20000\",\n            \"updated_at\": \"2023-12-02T14:10:10.000000Z\",\n            \"created_at\": \"2023-12-02T14:10:10.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "update item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": [
+								{
+									"key": "name",
+									"value": " item 1 bla bla bla",
+									"type": "text"
+								},
+								{
+									"key": "stock",
+									"value": " 200",
+									"type": "text"
+								},
+								{
+									"key": "unit",
+									"value": " pcs",
+									"type": "text"
+								},
+								{
+									"key": "unit_price",
+									"value": " 20000",
+									"type": "text"
+								},
+								{
+									"key": "picture",
+									"type": "file",
+									"src": []
+								}
+							]
+						},
+						"url": {
+							"raw": "{{base_url_local}}/items/{{item_id}}",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"items",
+								"{{item_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "update item",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": [
+										{
+											"key": "name",
+											"value": " item 1 bla bla bla",
+											"type": "text"
+										},
+										{
+											"key": "stock",
+											"value": " 200",
+											"type": "text"
+										},
+										{
+											"key": "unit",
+											"value": " pcs",
+											"type": "text"
+										},
+										{
+											"key": "unit_price",
+											"value": " 20000",
+											"type": "text"
+										},
+										{
+											"key": "picture",
+											"type": "file",
+											"src": []
+										}
+									]
+								},
+								"url": {
+									"raw": "{{base_url_local}}/items/{{item_id}}",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"items",
+										"{{item_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Dec 2023 15:14:04 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Dec 2023 15:14:04 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "57"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success update item\"\n}"
+						}
+					]
+				},
+				{
+					"name": "delete item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url_local}}/items/{{item_id}}/delete",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"items",
+								"{{item_id}}",
+								"delete"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "delete item",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url_local}}/items/{{item_id}}/delete",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"items",
+										"{{item_id}}",
+										"delete"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Dec 2023 08:53:15 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Dec 2023 08:53:15 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success delete item\"\n}"
+						}
+					]
+				},
+				{
+					"name": "get list items",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url_local}}/items",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"items"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get list items",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url_local}}/items",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"items"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Dec 2023 14:31:42 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Dec 2023 14:31:42 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success store item\",\n    \"data\": {\n        \"items\": [\n            {\n                \"id\": \"9ac0be7b-6b3d-4b44-8522-a58dadaac6a6\",\n                \"name\": \"perferendis\",\n                \"picture\": \"http://localhost:8000/storage/test.jpg\",\n                \"stock\": 100,\n                \"status_stock\": true,\n                \"unit\": \"pcs\",\n                \"unit_price\": 10000,\n                \"created_at\": \"2023-12-02T14:10:01.000000Z\",\n                \"updated_at\": \"2023-12-02T14:10:01.000000Z\"\n            },\n            {\n                \"id\": \"9ac0be7b-6b45-4253-b19e-3091d8aa45e3\",\n                \"name\": \"voluptas\",\n                \"picture\": \"http://localhost:8000/storage/pictures/items/UjLxsfo7xMXVDJVwzAp5jwLSb7XQrD3cuHYeOXN5.jpg\",\n                \"stock\": 100,\n                \"status_stock\": true,\n                \"unit\": \"pcs\",\n                \"unit_price\": 10000,\n                \"created_at\": \"2023-12-02T14:10:01.000000Z\",\n                \"updated_at\": \"2023-12-02T14:10:01.000000Z\"\n            },\n            {\n                \"id\": \"9ac0be7b-6b49-4cf9-b3d2-bd5d76a99633\",\n                \"name\": \"debitis\",\n                \"picture\": \"http://localhost:8000/storage/pictures/items/UjLxsfo7xMXVDJVwzAp5jwLSb7XQrD3cuHYeOXN5.jpg\",\n                \"stock\": 100,\n                \"status_stock\": true,\n                \"unit\": \"pcs\",\n                \"unit_price\": 10000,\n                \"created_at\": \"2023-12-02T14:10:01.000000Z\",\n                \"updated_at\": \"2023-12-02T14:10:01.000000Z\"\n            },\n            {\n                \"id\": \"9ac0be7b-6b4d-4c8a-b3dc-191d5c214a83\",\n                \"name\": \"quia\",\n                \"picture\": \"http://localhost:8000/storage/pictures/items/UjLxsfo7xMXVDJVwzAp5jwLSb7XQrD3cuHYeOXN5.jpg\",\n                \"stock\": 100,\n                \"status_stock\": true,\n                \"unit\": \"pcs\",\n                \"unit_price\": 10000,\n                \"created_at\": \"2023-12-02T14:10:01.000000Z\",\n                \"updated_at\": \"2023-12-02T14:10:01.000000Z\"\n            },\n            {\n                \"id\": \"9ac0be7b-6b50-45fc-aa27-3feb8af4fdb0\",\n                \"name\": \"tempora\",\n                \"picture\": \"http://localhost:8000/storage/pictures/items/UjLxsfo7xMXVDJVwzAp5jwLSb7XQrD3cuHYeOXN5.jpg\",\n                \"stock\": 0,\n                \"status_stock\": false,\n                \"unit\": \"pcs\",\n                \"unit_price\": 10000,\n                \"created_at\": \"2023-12-02T14:10:01.000000Z\",\n                \"updated_at\": \"2023-12-02T14:10:01.000000Z\"\n            },\n            {\n                \"id\": \"9ac0be88-5bf7-4889-86d4-a83811142330\",\n                \"name\": \"item 1\",\n                \"picture\": \"http://localhost:8000/storage/pictures/items/UjLxsfo7xMXVDJVwzAp5jwLSb7XQrD3cuHYeOXN5.jpg\",\n                \"stock\": 200,\n                \"status_stock\": true,\n                \"unit\": \"pcs\",\n                \"unit_price\": 20000,\n                \"created_at\": \"2023-12-02T14:10:10.000000Z\",\n                \"updated_at\": \"2023-12-02T14:10:10.000000Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get item",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "formdata",
+							"formdata": []
+						},
+						"url": {
+							"raw": "{{base_url_local}}/items/{{item_id}}",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"items",
+								"{{item_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get item",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "formdata",
+									"formdata": []
+								},
+								"url": {
+									"raw": "{{base_url_local}}/items/{{item_id}}",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"items",
+										"{{item_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Dec 2023 14:39:30 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Sat, 02 Dec 2023 14:39:30 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success get item\",\n    \"data\": {\n        \"item\": {\n            \"id\": \"9ac0be7b-6b3d-4b44-8522-a58dadaac6a6\",\n            \"name\": \"perferendis\",\n            \"picture\": \"http://localhost:8000/storage/test.jpg\",\n            \"stock\": 100,\n            \"status_stock\": true,\n            \"unit\": \"pcs\",\n            \"unit_price\": 10000,\n            \"updated_at\": \"2023-12-02T14:10:01.000000Z\",\n            \"created_at\": \"2023-12-02T14:10:01.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				}
+			]
+		},
+		{
+			"name": "order",
+			"item": [
+				{
+					"name": "store order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "POST",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": "{\n    \"total_all_price\": 40000,\n    \"item\": {\n        \"id\": \"9ac0be88-5bf7-4889-86d4-a83811142330\",\n        \"name\": \"item 1\",\n        \"unit\": \"pcs\",\n        \"unit_price\": 20000,\n        \"qty\": 2,\n        \"subtotal_price\": 40000\n    },\n    \"payment\": {\n        \"payer_name\": \"john doe\",\n        \"paid_amount\": 100000,\n        \"change_amount\": 60000,\n        \"payment_type\": \"CASH\"\n    }\n}"
+						},
+						"url": {
+							"raw": "{{base_url_local}}/orders",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "store order",
+							"originalRequest": {
+								"method": "POST",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "{\n    \"total_all_price\": 40000,\n    \"item\": {\n        \"id\": \"9ac0be88-5bf7-4889-86d4-a83811142330\",\n        \"name\": \"item 1\",\n        \"unit\": \"pcs\",\n        \"unit_price\": 20000,\n        \"qty\": 2,\n        \"subtotal_price\": 40000\n    },\n    \"payment\": {\n        \"payer_name\": \"john doe\",\n        \"paid_amount\": 100000,\n        \"change_amount\": 60000,\n        \"payment_type\": \"CASH\"\n    }\n}",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url_local}}/orders",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"status": "Created",
+							"code": 201,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Dec 2023 10:44:59 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Mon, 04 Dec 2023 10:44:59 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success store order\",\n    \"data\": {\n        \"order\": {\n            \"id\": \"9ac47b1f-aca5-4024-b0b6-2e85e1f50044\",\n            \"total_all_price\": 40000,\n            \"item\": {\n                \"id\": \"9ac47b1f-ad11-4857-83fd-eadb8a5265cf\",\n                \"item_id\": \"9ac0be88-5bf7-4889-86d4-a83811142330\",\n                \"order_id\": \"9ac47b1f-aca5-4024-b0b6-2e85e1f50044\",\n                \"name\": \"item 1\",\n                \"unit\": \"pcs\",\n                \"unit_price\": 20000,\n                \"qty\": 2,\n                \"subtotal_price\": 40000,\n                \"created_at\": \"2023-12-04T10:44:59.000000Z\",\n                \"updated_at\": \"2023-12-04T10:44:59.000000Z\"\n            },\n            \"payment\": {\n                \"id\": \"9ac47b1f-adbf-46f5-b7f5-4341bcb78f63\",\n                \"order_id\": \"9ac47b1f-aca5-4024-b0b6-2e85e1f50044\",\n                \"payer_name\": \"john doe\",\n                \"paid_amount\": 100000,\n                \"change_amount\": 60000,\n                \"payment_type\": \"CASH\",\n                \"created_at\": \"2023-12-04T10:44:59.000000Z\",\n                \"updated_at\": \"2023-12-04T10:44:59.000000Z\"\n            },\n            \"created_at\": \"2023-12-04T10:44:59.000000Z\",\n            \"updated_at\": \"2023-12-04T10:44:59.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get order",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url_local}}/orders/{{order_id}}",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"orders",
+								"{{order_id}}"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get order",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url_local}}/orders/{{order_id}}",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"orders",
+										"{{order_id}}"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Dec 2023 09:38:43 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Dec 2023 09:38:43 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success get detail order\",\n    \"data\": {\n        \"order\": {\n            \"id\": \"9ac8663c-22a5-4b39-ae00-fe0c905ac157\",\n            \"total_all_price\": 40000,\n            \"item\": {\n                \"id\": \"9ac8663c-232b-4177-9b1b-20a0b2a667ab\",\n                \"item_id\": \"9ac8663c-1d3c-4055-9ee5-fa73f691ca7e\",\n                \"order_id\": \"9ac8663c-22a5-4b39-ae00-fe0c905ac157\",\n                \"name\": \"item 1\",\n                \"unit\": \"pcs\",\n                \"unit_price\": 20000,\n                \"qty\": 2,\n                \"subtotal_price\": 40000,\n                \"created_at\": \"2023-12-06T09:29:53.000000Z\",\n                \"updated_at\": \"2023-12-06T09:29:53.000000Z\"\n            },\n            \"payment\": {\n                \"id\": \"9ac8663c-23af-400f-89e1-4b171b87b367\",\n                \"order_id\": \"9ac8663c-22a5-4b39-ae00-fe0c905ac157\",\n                \"payer_name\": \"Zoey Boehm PhD\",\n                \"paid_amount\": 100000,\n                \"change_amount\": 60000,\n                \"payment_type\": \"CASH\",\n                \"created_at\": \"2023-12-06T09:29:53.000000Z\",\n                \"updated_at\": \"2023-12-06T09:29:53.000000Z\"\n            },\n            \"created_at\": \"2023-12-06T09:29:53.000000Z\",\n            \"updated_at\": \"2023-12-06T09:29:53.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "generate reciept",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url_local}}/orders/{{order_id}}/generate-reciept",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"orders",
+								"{{order_id}}",
+								"generate-reciept"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "generate reciept",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url_local}}/orders/{{order_id}}/generate-reciept",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"orders",
+										"{{order_id}}",
+										"generate-reciept"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Dec 2023 09:45:14 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Dec 2023 09:45:14 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "59"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success generate reciept\",\n    \"data\": {\n        \"order\": {\n            \"id\": \"9ac8663c-22a5-4b39-ae00-fe0c905ac157\",\n            \"total_all_price\": 40000,\n            \"item\": {\n                \"id\": \"9ac8663c-232b-4177-9b1b-20a0b2a667ab\",\n                \"item_id\": \"9ac8663c-1d3c-4055-9ee5-fa73f691ca7e\",\n                \"order_id\": \"9ac8663c-22a5-4b39-ae00-fe0c905ac157\",\n                \"name\": \"item 1\",\n                \"unit\": \"pcs\",\n                \"unit_price\": 20000,\n                \"qty\": 2,\n                \"subtotal_price\": 40000,\n                \"created_at\": \"2023-12-06T09:29:53.000000Z\",\n                \"updated_at\": \"2023-12-06T09:29:53.000000Z\"\n            },\n            \"payment\": {\n                \"id\": \"9ac8663c-23af-400f-89e1-4b171b87b367\",\n                \"order_id\": \"9ac8663c-22a5-4b39-ae00-fe0c905ac157\",\n                \"payer_name\": \"Zoey Boehm PhD\",\n                \"paid_amount\": 100000,\n                \"change_amount\": 60000,\n                \"payment_type\": \"CASH\",\n                \"created_at\": \"2023-12-06T09:29:53.000000Z\",\n                \"updated_at\": \"2023-12-06T09:29:53.000000Z\"\n            },\n            \"created_at\": \"2023-12-06T09:29:53.000000Z\",\n            \"updated_at\": \"2023-12-06T09:29:53.000000Z\"\n        }\n    }\n}"
+						}
+					]
+				},
+				{
+					"name": "get list orders",
+					"event": [
+						{
+							"listen": "test",
+							"script": {
+								"exec": [
+									""
+								],
+								"type": "text/javascript"
+							}
+						}
+					],
+					"protocolProfileBehavior": {
+						"disableBodyPruning": true
+					},
+					"request": {
+						"auth": {
+							"type": "bearer",
+							"bearer": [
+								{
+									"key": "token",
+									"value": "{{access_token}}",
+									"type": "string"
+								}
+							]
+						},
+						"method": "GET",
+						"header": [
+							{
+								"key": "Accept",
+								"value": "application/json",
+								"type": "text"
+							},
+							{
+								"key": "Content-Type",
+								"value": "application/json",
+								"type": "text"
+							}
+						],
+						"body": {
+							"mode": "raw",
+							"raw": ""
+						},
+						"url": {
+							"raw": "{{base_url_local}}/orders",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"orders"
+							]
+						}
+					},
+					"response": [
+						{
+							"name": "get list orders",
+							"originalRequest": {
+								"method": "GET",
+								"header": [
+									{
+										"key": "Accept",
+										"value": "application/json",
+										"type": "text"
+									},
+									{
+										"key": "Content-Type",
+										"name": "Content-Type",
+										"value": "application/json",
+										"type": "text"
+									}
+								],
+								"body": {
+									"mode": "raw",
+									"raw": "",
+									"options": {
+										"raw": {
+											"language": "json"
+										}
+									}
+								},
+								"url": {
+									"raw": "{{base_url_local}}/orders",
+									"host": [
+										"{{base_url_local}}"
+									],
+									"path": [
+										"orders"
+									]
+								}
+							},
+							"status": "OK",
+							"code": 200,
+							"_postman_previewlanguage": "json",
+							"header": [
+								{
+									"key": "Host",
+									"value": "localhost:8000"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Dec 2023 09:40:41 GMT"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 06 Dec 2023 09:40:41 GMT"
+								},
+								{
+									"key": "Connection",
+									"value": "close"
+								},
+								{
+									"key": "X-Powered-By",
+									"value": "PHP/8.2.11"
+								},
+								{
+									"key": "Cache-Control",
+									"value": "no-cache, private"
+								},
+								{
+									"key": "Content-Type",
+									"value": "application/json"
+								},
+								{
+									"key": "X-RateLimit-Limit",
+									"value": "60"
+								},
+								{
+									"key": "X-RateLimit-Remaining",
+									"value": "58"
+								},
+								{
+									"key": "Access-Control-Allow-Origin",
+									"value": "*"
+								}
+							],
+							"cookie": [],
+							"body": "{\n    \"status\": true,\n    \"message\": \"success get list orders\",\n    \"data\": {\n        \"order\": [\n            {\n                \"id\": \"9ac47ac1-8601-4154-9b54-3655f465da51\",\n                \"order_code\": \"9ac47ac1-8623-48af-90a7-cba6046e0770\",\n                \"total_all_price\": 40000,\n                \"created_at\": \"2023-12-04T10:43:57.000000Z\",\n                \"updated_at\": \"2023-12-04T10:43:57.000000Z\"\n            },\n            {\n                \"id\": \"9ac47ae9-fb12-43f1-a5b8-d6dbc251adf9\",\n                \"order_code\": \"9ac47ae9-fb39-4420-a5e8-480347e78458\",\n                \"total_all_price\": 40000,\n                \"created_at\": \"2023-12-04T10:44:24.000000Z\",\n                \"updated_at\": \"2023-12-04T10:44:24.000000Z\"\n            },\n            {\n                \"id\": \"9ac47b1f-aca5-4024-b0b6-2e85e1f50044\",\n                \"order_code\": \"9ac47b1f-acb2-41a2-9c24-28fdbc8fa798\",\n                \"total_all_price\": 40000,\n                \"created_at\": \"2023-12-04T10:44:59.000000Z\",\n                \"updated_at\": \"2023-12-04T10:44:59.000000Z\"\n            },\n            {\n                \"id\": \"9ac8663c-22a5-4b39-ae00-fe0c905ac157\",\n                \"order_code\": \"9ac8663c-22a8-4588-a3f3-f2d25f9258ba\",\n                \"total_all_price\": 40000,\n                \"created_at\": \"2023-12-06T09:29:53.000000Z\",\n                \"updated_at\": \"2023-12-06T09:29:53.000000Z\"\n            }\n        ]\n    }\n}"
+						}
+					]
+				}
+			]
+		}
+	]
+}
