@@ -22,6 +22,10 @@ php artisan migrate:refresh --seed
 php artisan serve
 ```
 
+## documentation
+
+documentations is on the folder "documentation". documentations created using postman. to using it you need to import both env and collection. make sure to activate the imported env on postman environments.
+
 ## other notes
 
 maybe you will have problem when try to store image/media. make sure to update your php.ini file on your local environment
