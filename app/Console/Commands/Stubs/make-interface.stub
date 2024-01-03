@@ -3,5 +3,5 @@
 namespace DummyNamespace;
 
 interface DummyClass {
-    public function example() : object;
+    // public function example() : object;
 }
