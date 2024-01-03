@@ -315,7 +315,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test6@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}"
+							"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test8@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}"
 						},
 						"url": {
 							"raw": "{{base_url_local}}/register",
@@ -340,19 +340,13 @@
 									},
 									{
 										"key": "Content-Type",
-										"name": "Content-Type",
 										"value": "application/json",
 										"type": "text"
 									}
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test6@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}",
-									"options": {
-										"raw": {
-											"language": "json"
-										}
-									}
+									"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test8@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}"
 								},
 								"url": {
 									"raw": "{{base_url_local}}/register",
@@ -364,8 +358,8 @@
 									]
 								}
 							},
-							"status": "OK",
-							"code": 200,
+							"status": "Created",
+							"code": 201,
 							"_postman_previewlanguage": "json",
 							"header": [
 								{
@@ -373,24 +367,20 @@
 									"value": "localhost:8000"
 								},
 								{
-									"key": "Date",
-									"value": "Fri, 01 Dec 2023 12:06:26 GMT"
-								},
-								{
-									"key": "Date",
-									"value": "Fri, 01 Dec 2023 12:06:26 GMT"
-								},
-								{
 									"key": "Connection",
 									"value": "close"
 								},
 								{
 									"key": "X-Powered-By",
-									"value": "PHP/8.2.11"
+									"value": "PHP/8.3.0"
 								},
 								{
 									"key": "Cache-Control",
 									"value": "no-cache, private"
+								},
+								{
+									"key": "Date",
+									"value": "Wed, 03 Jan 2024 07:56:03 GMT"
 								},
 								{
 									"key": "Content-Type",
@@ -410,7 +400,7 @@
 								}
 							],
 							"cookie": [],
-							"body": "{\n    \"status\": true,\n    \"message\": \"success register user\",\n    \"data\": {\n        \"user\": {\n            \"id\": \"9abe8f4c-8971-45e7-87fd-7e415a5f1034\",\n            \"name\": \"john doe\",\n            \"email\": \"test6@example.com\",\n            \"email_verified_at\": \"2023-12-01T12:06:26.000000Z\",\n            \"role\": \"ADMIN\",\n            \"updated_at\": \"2023-12-01T12:06:26.000000Z\",\n            \"created_at\": \"2023-12-01T12:06:26.000000Z\"\n        }\n    }\n}"
+							"body": "{\n    \"status\": true,\n    \"message\": \"success register user\",\n    \"data\": {\n        \"user\": {\n            \"id\": \"9b00983b-2f50-460b-84cc-8568eb648b34\",\n            \"name\": \"john doe\",\n            \"email\": \"test8@example.com\",\n            \"email_verified_at\": \"2024-01-03T07:56:03.000000Z\",\n            \"role\": \"ADMIN\",\n            \"updated_at\": \"2024-01-03T07:56:03.000000Z\",\n            \"created_at\": \"2024-01-03T07:56:03.000000Z\"\n        }\n    }\n}"
 						}
 					]
 				},
@@ -456,7 +446,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test2@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "{{base_url_local}}/users",
@@ -488,7 +478,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test2@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -597,7 +587,7 @@
 						],
 						"body": {
 							"mode": "raw",
-							"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test2@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}"
+							"raw": ""
 						},
 						"url": {
 							"raw": "{{base_url_local}}/logged-user",
@@ -629,7 +619,7 @@
 								],
 								"body": {
 									"mode": "raw",
-									"raw": "{\n    \"name\": \"john doe\",\n    \"email\": \"test2@example.com\",\n    \"password\": \"password\",\n    \"password_confirmation\": \"password\",\n    \"role\": \"ADMIN\"\n}",
+									"raw": "",
 									"options": {
 										"raw": {
 											"language": "json"
@@ -2050,6 +2040,28 @@
 							"body": "{\n    \"status\": true,\n    \"message\": \"success get list orders\",\n    \"data\": {\n        \"order\": [\n            {\n                \"id\": \"9ac47ac1-8601-4154-9b54-3655f465da51\",\n                \"order_code\": \"9ac47ac1-8623-48af-90a7-cba6046e0770\",\n                \"total_all_price\": 40000,\n                \"created_at\": \"2023-12-04T10:43:57.000000Z\",\n                \"updated_at\": \"2023-12-04T10:43:57.000000Z\"\n            },\n            {\n                \"id\": \"9ac47ae9-fb12-43f1-a5b8-d6dbc251adf9\",\n                \"order_code\": \"9ac47ae9-fb39-4420-a5e8-480347e78458\",\n                \"total_all_price\": 40000,\n                \"created_at\": \"2023-12-04T10:44:24.000000Z\",\n                \"updated_at\": \"2023-12-04T10:44:24.000000Z\"\n            },\n            {\n                \"id\": \"9ac47b1f-aca5-4024-b0b6-2e85e1f50044\",\n                \"order_code\": \"9ac47b1f-acb2-41a2-9c24-28fdbc8fa798\",\n                \"total_all_price\": 40000,\n                \"created_at\": \"2023-12-04T10:44:59.000000Z\",\n                \"updated_at\": \"2023-12-04T10:44:59.000000Z\"\n            },\n            {\n                \"id\": \"9ac8663c-22a5-4b39-ae00-fe0c905ac157\",\n                \"order_code\": \"9ac8663c-22a8-4588-a3f3-f2d25f9258ba\",\n                \"total_all_price\": 40000,\n                \"created_at\": \"2023-12-06T09:29:53.000000Z\",\n                \"updated_at\": \"2023-12-06T09:29:53.000000Z\"\n            }\n        ]\n    }\n}"
 						}
 					]
+				}
+			]
+		},
+		{
+			"name": "test",
+			"item": [
+				{
+					"name": "test",
+					"request": {
+						"method": "GET",
+						"header": [],
+						"url": {
+							"raw": "{{base_url_local}}/test",
+							"host": [
+								"{{base_url_local}}"
+							],
+							"path": [
+								"test"
+							]
+						}
+					},
+					"response": []
 				}
 			]
 		}
