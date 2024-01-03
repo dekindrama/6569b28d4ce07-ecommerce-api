@@ -11,21 +11,25 @@ use App\Http\Controllers\Controller;
 use App\Http\Requests\Auth\LoginRequest;
 use App\Http\Requests\Auth\RegisterRequest;
 use App\Models\User;
+use App\Services\Auth\AuthService;
+use App\Services\Auth\AuthServiceInterface;
+use App\Services\Auth\Entities\LoginEntity;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Str;
 
 class AuthController extends Controller
 {
-    public function login(LoginRequest $request) : Response {
+    public function login(LoginRequest $request, AuthServiceInterface $authService): Response
+    {
         try {
-            $user = User::where('email', $request->email)->first();
-
-            if (! $user || ! Hash::check($request->password, $user->password)) {
-                throw new BadRequestException('The provided credentials are incorrect.');
-            }
-
-            $accessToken = $user->createToken($request->device_name)->plainTextToken;
+            $validatedRequest = (object)$request;
+            $loginEntity = new LoginEntity(
+                $validatedRequest->email,
+                $validatedRequest->password,
+                $validatedRequest->device_name,
+            );
+            $accessToken = $authService->login($loginEntity);
 
             return ResponseHelper::generate(
                 true,
@@ -42,22 +46,10 @@ class AuthController extends Controller
         }
     }
 
-    public function getLoggedUser() : Response {
-        $loggedUser = auth('sanctum')->user();
-        return ResponseHelper::generate(
-            true,
-            'success get logged user',
-            Response::HTTP_OK,
-            [
-                'logged_user' => $loggedUser,
-            ],
-        );
-    }
-
-    public function logout() : Response {
+    public function logout(AuthServiceInterface $authService): Response
+    {
         try {
-            $loggedUser = auth('sanctum')->user();
-            $loggedUser->tokens()->delete();
+            $authService->logout();
 
             return ResponseHelper::generate(
                 true,
@@ -71,52 +63,26 @@ class AuthController extends Controller
         }
     }
 
-    //* only for super admin
-    public function register(RegisterRequest $request) : Response {
-        try {
-            //* check logged user is super admin
-            $loggedUser = auth('sanctum')->user();
-            if ($loggedUser->role !== UserRoleEnum::SUPER_ADMIN) {
-                throw new UnauthorizedException('action is unauthorized, only for super admin');
-            }
-
-            //* register user
-            $registeredUser = User::create([
-                'id' => Str::orderedUuid(),
-                'name' => $request->name,
-                'email' => $request->email,
-                'password' => $request->password,
-                'email_verified_at' => now(),
-                'role' => $request->role,
-            ]);
-
-            //* response data
-            return ResponseHelper::generate(
-                true,
-                'success register user',
-                Response::HTTP_OK,
-                [
-                    'user' => $registeredUser,
-                ],
-            );
-        } catch (CommonException $th) {
-            return $th->renderResponse();
-        } catch (\Throwable $th) {
-            throw $th;
-        }
+    public function getLoggedUser(AuthServiceInterface $authService): Response
+    {
+        $loggedUser = $authService->getLoggedUser();
+        return ResponseHelper::generate(
+            true,
+            'success get logged user',
+            Response::HTTP_OK,
+            [
+                'logged_user' => $loggedUser,
+            ],
+        );
     }
 
     //* only for super admin
-    public function getListUsers() : Response {
+    public function getListUsers(AuthServiceInterface $authService): Response
+    {
         try {
-            //* check logged user is super admin
-            $loggedUser = auth('sanctum')->user();
-            if ($loggedUser->role !== UserRoleEnum::SUPER_ADMIN) {
-                throw new UnauthorizedException('action is unauthorized, only for super admin');
-            }
-
             //* get list users
-            $users = User::select('id', 'name', 'email', 'created_at', 'updated_at')->get();
+            $loggedUser = $authService->getLoggedUser();
+            $users = $authService->getListUsers($loggedUser);
 
             //* response data
             return ResponseHelper::generate(
@@ -133,5 +99,28 @@ class AuthController extends Controller
             throw $th;
         }
     }
+
+    //* only for super admin
+    public function register(RegisterRequest $request, AuthServiceInterface $authService): Response
+    {
+        try {
+            $loggedUser = $authService->getLoggedUser();
+            $validatedRequest = (object)$request;
+            $registeredUser = $authService->register($loggedUser, $validatedRequest);
+
+            //* response data
+            return ResponseHelper::generate(
+                true,
+                'success register user',
+                Response::HTTP_CREATED,
+                [
+                    'user' => $registeredUser,
+                ],
+            );
+        } catch (CommonException $th) {
+            return $th->renderResponse();
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
 }
-;
