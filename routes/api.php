@@ -3,6 +3,7 @@
 use App\Http\Controllers\API\Auth\AuthController;
 use App\Http\Controllers\API\Item\ItemController;
 use App\Http\Controllers\API\Order\OrderController;
+use App\Http\Controllers\TestController;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Route;
 
@@ -42,3 +43,5 @@ Route::middleware(['auth:sanctum'])->group(function () {
     Route::get('orders/{order_id}', [OrderController::class, 'getDetailOrder'])->name('orders.show');
     Route::get('orders/{order_id}/generate-reciept', [OrderController::class, 'generateReciept'])->name('orders.generate_reciept');
 });
+
+Route::get('/test', [TestController::class, 'index'])->name('test.index');
