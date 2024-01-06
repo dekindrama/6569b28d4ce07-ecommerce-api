@@ -1,0 +1,5 @@
+refactor order requests
+> store order
+> get order
+> generate reciept
+> get list orders

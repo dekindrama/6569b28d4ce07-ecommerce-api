@@ -13,34 +13,19 @@ use App\Http\Requests\Item\UpdateItemRequest;
 use App\Http\Resources\Item\ItemDetailsResource;
 use App\Http\Resources\Item\ListItemsResource;
 use App\Models\Item;
-use Illuminate\Http\Request;
+use App\Services\Auth\AuthServiceInterface;
+use App\Services\Item\ItemServiceInterface;
 use Illuminate\Http\Response;
 use Illuminate\Support\Facades\Storage;
-use Illuminate\Support\Str;
 
 class ItemController extends Controller
 {
-    public function storeItem(StoreItemRequest $request) : Response {
+    public function storeItem(StoreItemRequest $request, AuthServiceInterface $authService, ItemServiceInterface $itemService): Response
+    {
         try {
-            //* check logged user is admin / super admin
-            $loggedUser = auth('sanctum')->user();
-            $isNotAuthorized = !(in_array($loggedUser->role, UserRoleEnum::ROLES));
-            if ($isNotAuthorized) {
-                throw new UnauthorizedException('action is unauthorized');
-            }
-
-            //* store image
-            $storedPicture = Storage::disk('public')->put('pictures/items', $request->picture);
-
             //* store item
-            $storedItem = Item::create([
-                'id' => Str::orderedUuid(),
-                'name' => $request->name,
-                'picture' => $storedPicture,
-                'stock' => $request->stock,
-                'unit' => $request->unit,
-                'unit_price' => $request->unit_price,
-            ]);
+            $loggedUser = $authService->getLoggedUser();
+            $storedItem = $itemService->storeItem($loggedUser, $request);
 
             //* return response
             return ResponseHelper::generate(
@@ -58,7 +43,8 @@ class ItemController extends Controller
         }
     }
 
-    public function getListItems() : Response {
+    public function getListItems(): Response
+    {
         try {
             //* get list item
             $items = Item::get();
@@ -79,7 +65,8 @@ class ItemController extends Controller
         }
     }
 
-    public function getDetailItem($item_id) : Response {
+    public function getDetailItem($item_id): Response
+    {
         try {
             //* get item
             $item = Item::find($item_id);
@@ -103,7 +90,8 @@ class ItemController extends Controller
         }
     }
 
-    public function updateItem(UpdateItemRequest $request, $item_id) : Response {
+    public function updateItem(UpdateItemRequest $request, $item_id): Response
+    {
         try {
             //* check logged user is admin / super admin
             $loggedUser = auth('sanctum')->user();
@@ -151,7 +139,8 @@ class ItemController extends Controller
         }
     }
 
-    public function softDeleteItem($item_id) : Response {
+    public function softDeleteItem($item_id): Response
+    {
         try {
             //* check logged user is admin / super admin
             $loggedUser = auth('sanctum')->user();

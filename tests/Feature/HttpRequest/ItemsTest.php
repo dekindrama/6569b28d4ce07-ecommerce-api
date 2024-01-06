@@ -49,7 +49,7 @@ class ItemsTest extends TestCase
         ]);
 
         //* assert
-        Storage::disk('public')->assertExists('pictures/items/' . $image->hashName());
+        Storage::disk('public')->assertExists(StorageHelper::generateFilePathItem() . '/' . $image->hashName());
         $response->assertCreated();
         $response->assertJson([
             'status' => true,
