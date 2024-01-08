@@ -23,12 +23,14 @@ use Illuminate\Support\Str;
 
 class OrderController extends Controller
 {
-    public function getListOrders() : Response {
+    public function getListOrders(): Response
+    {
         try {
             //* check logged user super admin
             $loggedUser = auth('sanctum')->user();
-            if ($loggedUser->role !== UserRoleEnum::SUPER_ADMIN) {
-                throw new UnauthorizedException('action is unauthorized, only for super admin');
+            $isNotAuthorized = !(in_array($loggedUser->role, UserRoleEnum::ROLES));
+            if ($isNotAuthorized) {
+                throw new UnauthorizedException('action is unauthorized');
             }
 
             //* get order
@@ -50,12 +52,14 @@ class OrderController extends Controller
         }
     }
 
-    public function generateReciept($order_id) : Response {
+    public function generateReciept($order_id): Response
+    {
         try {
             //* check logged user super admin
             $loggedUser = auth('sanctum')->user();
-            if ($loggedUser->role !== UserRoleEnum::SUPER_ADMIN) {
-                throw new UnauthorizedException('action is unauthorized, only for super admin');
+            $isNotAuthorized = !(in_array($loggedUser->role, UserRoleEnum::ROLES));
+            if ($isNotAuthorized) {
+                throw new UnauthorizedException('action is unauthorized');
             }
 
             //* get order
@@ -83,12 +87,14 @@ class OrderController extends Controller
         }
     }
 
-    public function getDetailOrder($order_id) : Response {
+    public function getDetailOrder($order_id): Response
+    {
         try {
             //* check logged user super admin
             $loggedUser = auth('sanctum')->user();
-            if ($loggedUser->role !== UserRoleEnum::SUPER_ADMIN) {
-                throw new UnauthorizedException('action is unauthorized, only for super admin');
+            $isNotAuthorized = !(in_array($loggedUser->role, UserRoleEnum::ROLES));
+            if ($isNotAuthorized) {
+                throw new UnauthorizedException('action is unauthorized');
             }
 
             //* get order
@@ -116,7 +122,8 @@ class OrderController extends Controller
         }
     }
 
-    public function storeOrder(StoreOrderRequest $request) : Response {
+    public function storeOrder(StoreOrderRequest $request): Response
+    {
         try {
             DB::beginTransaction();
 
@@ -142,8 +149,9 @@ class OrderController extends Controller
 
             //* check logged user super admin
             $loggedUser = auth('sanctum')->user();
-            if ($loggedUser->role !== UserRoleEnum::SUPER_ADMIN) {
-                throw new UnauthorizedException('action is unauthorized, only for super admin');
+            $isNotAuthorized = !(in_array($loggedUser->role, UserRoleEnum::ROLES));
+            if ($isNotAuthorized) {
+                throw new UnauthorizedException('action is unauthorized');
             }
 
             //* store order
@@ -197,7 +205,8 @@ class OrderController extends Controller
         }
     }
 
-    private function _checkTotalPriceIsEqual($requestItem) : void {
+    private function _checkTotalPriceIsEqual($requestItem): void
+    {
         //* find item
         $item = Item::find($requestItem->id);
         if (!$item) {
@@ -211,7 +220,8 @@ class OrderController extends Controller
         }
     }
 
-    private function _checkTotalAllPriceIsEqual($requestItem, $totalAllPrice) : void {
+    private function _checkTotalAllPriceIsEqual($requestItem, $totalAllPrice): void
+    {
         //* find item
         $item = Item::find($requestItem->id);
         if (!$item) {
@@ -219,13 +229,13 @@ class OrderController extends Controller
         }
 
         $itemSubtotalPrice = $item->unit_price * $requestItem->qty;
-
         if ($itemSubtotalPrice != $totalAllPrice) {
             throw new BadRequestException('total all price is not equal');
         }
     }
 
-    private function _substractItemStock($requestItem) : void {
+    private function _substractItemStock($requestItem): void
+    {
         //* find item
         $item = Item::find($requestItem->id);
         if (!$item) {
