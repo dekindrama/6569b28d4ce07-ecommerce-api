@@ -175,12 +175,14 @@ return [
         App\Providers\Domains\AuthDomainProvider::class,
         App\Providers\Domains\ItemDomainProvider::class,
         App\Providers\Domains\StorageDomainProvider::class,
+        App\Providers\Domains\OrderDomainProvider::class,
 
         /*
         * services
         */
         App\Providers\Services\AuthServiceProvider::class,
         App\Providers\Services\ItemServiceProvider::class,
+        App\Providers\Services\OrderServiceProvider::class,
     ])->toArray(),
 
     /*

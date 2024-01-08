@@ -17,7 +17,9 @@ class OrderFactory extends Factory
     public function definition(): array
     {
         return [
-            //
+            'id' => fake()->uuid(),
+            'order_code' => fake()->uuid(),
+            'total_all_price' => 100000,
         ];
     }
 }

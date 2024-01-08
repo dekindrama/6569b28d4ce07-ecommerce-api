@@ -95,7 +95,7 @@ class OrderTest extends TestCase
         //* assert
         $response->assertOk();
 
-        $response->assertJsonCount(1, 'data.order');
+        $response->assertJsonCount(1, 'data.orders');
     }
 
     function test_get_generate_reciept(): void

@@ -4,6 +4,7 @@ namespace App\Domains\Item;
 
 use App\Domains\Item\Entities\StoreItemEntity;
 use App\Domains\Item\Entities\UpdateItemEntity;
+use App\Domains\Items\Entities\CheckItemIsExistEntity;
 use App\Exceptions\Commons\NotFoundException;
 use App\Models\Item;
 use Illuminate\Database\Eloquent\Collection;
@@ -19,7 +20,7 @@ class ItemRepository implements ItemRepositoryInterface
 
     function storeItem(StoreItemEntity $params): Item
     {
-        $storedItem = Item::create([
+        $storedItem = $this->_itemModel->create([
             'id' => Str::orderedUuid(),
             'name' => $params->name,
             'picture' => $params->picture,
@@ -77,5 +78,29 @@ class ItemRepository implements ItemRepositoryInterface
             throw new NotFoundException('item not found');
         }
         return $item;
+    }
+
+    public function checkItemIsExist(CheckItemIsExistEntity $params): void
+    {
+        $item = $this->_itemModel->query()
+        ->where('id', $params->id)
+        ->where('name', $params->name)
+        ->where('unit', $params->unit)
+        ->where('unit_price', $params->unit_price)
+        ->first();
+        if (!$item) {
+            throw new NotFoundException('item not found');
+        }
+    }
+
+    public function substractItemStock(string $itemId, int $qty): void
+    {
+        //* find item
+        $item = $this->_itemModel->find($itemId);
+        if (!$item) {
+            throw new NotFoundException('item not found');
+        }
+        //* substact item stock
+        $item->decrement('stock', $qty);
     }
 }

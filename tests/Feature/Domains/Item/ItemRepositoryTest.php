@@ -5,6 +5,7 @@ namespace Tests\Feature\Domains\Item;
 use App\Domains\Item\Entities\StoreItemEntity;
 use App\Domains\Item\Entities\UpdateItemEntity;
 use App\Domains\Item\ItemRepository;
+use App\Domains\Items\Entities\CheckItemIsExistEntity;
 use App\Http\Requests\Item\StoreItemRequest;
 use App\Http\Requests\Item\UpdateItemRequest;
 use App\Models\Item;
@@ -113,5 +114,37 @@ class ItemRepositoryTest extends TestCase
             "unit" => $validatedRequest->unit,
             "unit_price" => $validatedRequest->unit_price,
         ]);
+    }
+
+    function test_check_item_is_exist() : void {
+        //* params
+        $fakeItem = Item::factory()->create();
+
+        //* action
+        $itemRepository = new ItemRepository(new Item());
+        $entity = new CheckItemIsExistEntity(
+            $fakeItem->id,
+            $fakeItem->name,
+            $fakeItem->unit,
+            $fakeItem->unit_price,
+        );
+        $itemRepository->checkItemIsExist($entity);
+
+        //* assert
+        $this->expectNotToPerformAssertions();
+    }
+
+    function test_substract_item_stock() : void {
+        //* params
+        $fakeItem = Item::factory()->create([
+            'stock' => 10,
+        ]);
+
+        //* action
+        $itemRepository = new ItemRepository(new Item());
+        $itemRepository->substractItemStock($fakeItem->id, 5);
+
+        //* assert
+        $this->assertEquals(5, Item::find($fakeItem->id)->stock);
     }
 }

@@ -1,5 +1,23 @@
-refactor order requests
-> store order
-> get order
-> generate reciept
-> get list orders
+itemRepository(
+    new Item()
+)
+> checkItemIsExist(string $itemId): bool
+> substractItemStock(string $itemId, int $qty): void
+
+orderRepository(
+    new Order()
+)
+> checkTotalPriceIsEqual(CheckTotalPriceIsEqualEntity $params) : bool
+> checkTotalAllPriceIsEqual(CheckTotalAllPriceIsEqualEntity $params) : bool
+> storeOrder(StoreOrderEntity $params): Order
+> storeOrderItem(StoreOrderItem $params) : OrderItem
+
+============================================================
+
+orderService(
+    itemRepository,
+    orderRepository,
+)
+
+> storeOrder(StoreOrderRequest $validatedRequest, User $loggedUser) : Order
+> _checkLoggedUserSuperAdmin(User $loggedUser): void
