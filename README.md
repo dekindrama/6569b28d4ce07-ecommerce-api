@@ -22,6 +22,15 @@ php artisan migrate:refresh --seed
 php artisan serve
 ```
 
+## run project
+```bash
+# run auto testing
+php artisan test
+
+# run testing on specific test class
+php artisan test --filter=ClassName
+```
+
 ## documentation
 
 documentations is on the folder "documentation". documentations created using postman. to using it you need to import both env and collection. make sure to activate the imported env on postman environments.
