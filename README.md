@@ -22,7 +22,7 @@ php artisan migrate:refresh --seed
 php artisan serve
 ```
 
-## run project
+## run testing
 ```bash
 # run auto testing
 php artisan test
