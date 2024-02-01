@@ -22,7 +22,7 @@ class AuthServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(AuthServiceInterface::class, function ($app) {
+        $this->app->bind(AuthServiceInterface::class, function ($app) : AuthServiceInterface {
             return new AuthService(
                 $app->make(AuthRepositoryInterface::class),
             );

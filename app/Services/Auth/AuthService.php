@@ -15,8 +15,10 @@ use Mockery\MockInterface;
 
 class AuthService implements AuthServiceInterface
 {
-    private $_authRepository;
-    public function __construct(AuthRepositoryInterface|MockInterface $authRepository) {
+    private AuthRepositoryInterface|MockInterface $_authRepository;
+    public function __construct(
+        AuthRepositoryInterface|MockInterface $authRepository
+    ) {
         $this->_authRepository = $authRepository;
     }
 

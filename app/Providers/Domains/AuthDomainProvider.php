@@ -22,7 +22,7 @@ class AuthDomainProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(AuthRepositoryInterface::class, function($app) {
+        $this->app->bind(AuthRepositoryInterface::class, function($app) : AuthRepositoryInterface {
             return new AuthRepository(new User());
         });
     }

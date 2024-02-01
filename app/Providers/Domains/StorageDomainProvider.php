@@ -22,7 +22,7 @@ class StorageDomainProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(StorageRepositoryInterface::class, function ($app): StorageRepository {
+        $this->app->bind(StorageRepositoryInterface::class, function ($app): StorageRepositoryInterface {
             return new StorageRepository(Storage::disk('public'));
         });
     }

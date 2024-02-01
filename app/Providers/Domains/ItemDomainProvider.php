@@ -22,7 +22,7 @@ class ItemDomainProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(ItemRepositoryInterface::class, function ($app): ItemRepository {
+        $this->app->bind(ItemRepositoryInterface::class, function ($app): ItemRepositoryInterface {
             return new ItemRepository(
                 new Item(),
             );

@@ -23,7 +23,7 @@ class ItemServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(ItemServiceInterface::class, function ($app): ItemService {
+        $this->app->bind(ItemServiceInterface::class, function ($app): ItemServiceInterface {
             return new ItemService(
                 $app->make(ItemRepositoryInterface::class),
                 $app->make(StorageRepositoryInterface::class),

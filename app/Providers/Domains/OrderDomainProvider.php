@@ -25,7 +25,7 @@ class OrderDomainProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(OrderRepositoryInterface::class, function () : OrderRepository {
+        $this->app->bind(OrderRepositoryInterface::class, function () : OrderRepositoryInterface {
             return new OrderRepository(new Order(), new OrderItem(), new Item(), new OrderPayment());
         });
     }

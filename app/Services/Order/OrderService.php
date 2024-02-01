@@ -2,26 +2,30 @@
 
 namespace App\Services\Order;
 
-use App\Domains\Item\ItemRepository;
+use App\Domains\Item\ItemRepositoryInterface;
 use App\Domains\Items\Entities\CheckItemIsExistEntity;
 use App\Domains\Order\Entities\CheckTotalAllPriceIsEqualEntity;
 use App\Domains\Order\Entities\CheckTotalPriceIsEqualEntity;
 use App\Domains\Order\Entities\StoreOrderEntity;
 use App\Domains\Order\Entities\StoreOrderItemEntity;
 use App\Domains\Order\Entities\StoreOrderPaymentEntity;
-use App\Domains\Order\OrderRepository;
+use App\Domains\Order\OrderRepositoryInterface;
 use App\Enums\UserRoleEnum;
 use App\Exceptions\Commons\UnauthorizedException;
 use App\Http\Requests\Order\StoreOrderRequest;
 use App\Models\User;
 use App\Models\Order;
 use Illuminate\Database\Eloquent\Collection;
+use Mockery\MockInterface;
 
 class OrderService implements OrderServiceInterface
 {
-    private ItemRepository $_itemRepository;
-    private OrderRepository $_orderRepository;
-    public function __construct(ItemRepository $itemRepository, OrderRepository $orderRepository) {
+    private ItemRepositoryInterface|MockInterface $_itemRepository;
+    private OrderRepositoryInterface|MockInterface $_orderRepository;
+    public function __construct(
+        ItemRepositoryInterface|MockInterface $itemRepository,
+        OrderRepositoryInterface|MockInterface $orderRepository,
+    ) {
         $this->_itemRepository = $itemRepository;
         $this->_orderRepository = $orderRepository;
     }

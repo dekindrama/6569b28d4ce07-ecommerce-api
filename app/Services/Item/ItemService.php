@@ -4,8 +4,8 @@ namespace App\Services\Item;
 
 use App\Domains\Item\Entities\StoreItemEntity;
 use App\Domains\Item\Entities\UpdateItemEntity;
-use App\Domains\Item\ItemRepository;
-use App\Domains\Storage\StorageRepository;
+use App\Domains\Item\ItemRepositoryInterface;
+use App\Domains\Storage\StorageRepositoryInterface;
 use App\Enums\UserRoleEnum;
 use App\Exceptions\Commons\UnauthorizedException;
 use App\Helpers\StorageHelper;
@@ -14,14 +14,16 @@ use App\Http\Requests\Item\StoreItemRequest;
 use App\Http\Requests\Item\UpdateItemRequest;
 use App\Models\Item;
 use Illuminate\Database\Eloquent\Collection;
-use Illuminate\Support\Facades\Storage;
+use Mockery\MockInterface;
 
 class ItemService implements ItemServiceInterface
 {
-    private ItemRepository $_itemRepository;
-    private StorageRepository $_storageRepository;
-    public function __construct(ItemRepository $itemRepository, StorageRepository $storageRepository)
-    {
+    private ItemRepositoryInterface|MockInterface $_itemRepository;
+    private StorageRepositoryInterface|MockInterface $_storageRepository;
+    public function __construct(
+        ItemRepositoryInterface|MockInterface $itemRepository,
+        StorageRepositoryInterface|MockInterface $storageRepository,
+    ) {
         $this->_itemRepository = $itemRepository;
         $this->_storageRepository = $storageRepository;
     }

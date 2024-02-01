@@ -23,7 +23,7 @@ class OrderServiceProvider extends ServiceProvider
      */
     public function boot(): void
     {
-        $this->app->bind(OrderServiceInterface::class, function ($app) : OrderService {
+        $this->app->bind(OrderServiceInterface::class, function ($app) : OrderServiceInterface {
             return new OrderService(
                 $app->make(ItemRepositoryInterface::class),
                 $app->make(OrderRepositoryInterface::class),
